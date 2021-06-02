@@ -6,7 +6,7 @@ Ziel: Umsetzung des Observer Patterns und des Singleton Patterns
 
 Folgende Schritte sind zu durchzuführen
 
-* Bauen Sie den Controller auf einen Singleton um
+* (ERLEDIGT) Bauen Sie den Controller auf einen Singleton um
 * Schreiben Sie das Interface Observer mit der Methode
     * update  
 * Implementieren Sie die Klasse Subject mit den Methoden
