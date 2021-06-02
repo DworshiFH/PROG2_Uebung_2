@@ -25,11 +25,11 @@ public class TrafficLightGui extends JFrame implements ActionListener, Observer 
     public TrafficLightGui(TrafficLightCtrl ctrl){
         super(NAME_OF_THE_GAME);
         trafficLightCtrl = ctrl;
-        initLights(ctrl);
+        initLights();
         init();
     }
 
-    private void initLights(TrafficLightCtrl ctrl) {
+    private void initLights() {
         //TODO implement a part of the pattern here
         //create the TrafficLight
         green = new TrafficLight(Color.green);
@@ -38,6 +38,12 @@ public class TrafficLightGui extends JFrame implements ActionListener, Observer 
 
         green.turnOn(true);
 
+        trafficLightCtrl.addObserver(new Observer() {
+            @Override
+            public void update(State state) {
+                changeLights(state.getColor());
+            }
+        });
         //connect subject and observer
     }
 
@@ -76,7 +82,11 @@ public class TrafficLightGui extends JFrame implements ActionListener, Observer 
 
     @Override
     public void update(State state) {
-        switch(state.getColor()){
+        changeLights(state.getColor());
+    }
+
+    public void changeLights(String colour){
+        switch(colour){
             case "green":
                 green.turnOn(true);
                 yellow.turnOn(false);

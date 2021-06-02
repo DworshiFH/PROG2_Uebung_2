@@ -1,16 +1,16 @@
 package trafficlight.ctrl;
 
 import trafficlight.gui.Observer;
+import trafficlight.gui.Subscriber;
 import trafficlight.gui.TrafficLightGui;
 import trafficlight.states.State;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrafficLightCtrl {
+public class TrafficLightCtrl implements Subscriber {
 
     private List<Observer> observerList = new ArrayList<>();
-    private int numOfObservers =0;
 
     private State greenState;
 
@@ -34,7 +34,7 @@ public class TrafficLightCtrl {
         gui = new TrafficLightGui(this);
         gui.setVisible(true);
         //TODO useful to update the current state
-        notifyObservers();
+        update();
     }
 
     public static TrafficLightCtrl getInstance(){ //SINGLETON PATTERN: Access method to retrieve instance
@@ -49,7 +49,7 @@ public class TrafficLightCtrl {
             public State getNextState() {
                 previousState = currentState;
                 //TODO useful to update the current state and the old one
-                notifyObservers();
+                update();
                 return yellowState;
             }
             @Override
@@ -63,7 +63,7 @@ public class TrafficLightCtrl {
             public State getNextState() {
                 previousState = currentState;
                 //TODO useful to update the current state and the old one
-                notifyObservers();
+                update();
                 return yellowState;
             }
             @Override
@@ -78,12 +78,12 @@ public class TrafficLightCtrl {
                 if (previousState.equals(greenState)) {
                     previousState = currentState;
                     //TODO useful to update the current state and the old one
-                    notifyObservers();
+                    update();
                     return redState;
                 }else {
                     previousState = currentState;
                     //TODO useful to update the current state and the old one
-                    notifyObservers();
+                    update();
                     return greenState;
                 }
             }
@@ -130,18 +130,25 @@ public class TrafficLightCtrl {
         doRun = false;
     }
 
+    @Override
     public void addObserver(Observer observer){
         this.observerList.add(observer);
-        numOfObservers++;
     }
 
+    @Override
     public void removeObserver(Observer observer){
         this.observerList.remove(observer);
-        numOfObservers--;
     }
 
     //sends controller state to GUI
-    public void notifyObservers() {
-        gui.update(currentState);
+    @Override
+    public void update() {
+        notifyObservers();
+    }
+
+    public void notifyObservers(){
+        for(Observer observer : this.observerList) {
+            observer.update(currentState);
+        }
     }
 }
