@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class TestUpdateFunction {
 
-    State greenState;
+    /*State greenState;
     State yellowState;
     State redState;
 
@@ -69,5 +69,5 @@ public class TestUpdateFunction {
         assertTrue(gui.redIsOn());
         assertFalse(gui.yellowIsOn());
         assertFalse(gui.greenIsOn());
-    }
+    }*/
 }

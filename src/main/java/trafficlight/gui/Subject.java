@@ -1,7 +1,7 @@
 package trafficlight.gui;
 
-public interface Publisher {
+public interface Subject {
     <T extends Observer> void addObserver(T t);
     <T extends Observer> void removeObserver(T t);
-    void update();
+    void notifyObservers();
 }
