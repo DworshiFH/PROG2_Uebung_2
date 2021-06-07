@@ -1,14 +1,14 @@
 package trafficlight.ctrl;
 
 import trafficlight.gui.Observer;
-import trafficlight.gui.Subscriber;
+import trafficlight.gui.Publisher;
 import trafficlight.gui.TrafficLightGui;
 import trafficlight.states.State;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TrafficLightCtrl implements Subscriber {
+public class TrafficLightCtrl implements Publisher {
 
     private List<Observer> observerList = new ArrayList<>();
 
